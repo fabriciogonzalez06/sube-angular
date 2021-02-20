@@ -1,0 +1,53 @@
+<p-toast></p-toast>
+
+<div class="container ">
+
+  <p-breadcrumb [model]="elementosBreadcrumb" ></p-breadcrumb>
+
+  <div class="p-mt-3">
+
+    <div class="card">
+
+        <app-cargando *ngIf="cargando" ></app-cargando>
+        <p-table [responsive]="true"  [hidden]="cargando" #dt [value]="mensajes" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre','correo']"
+             [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    <h5 class="p-m-0">Mensajes</h5>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search..." />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+
+                    <th pSortableColumn="name">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                    <th pSortableColumn="price">Correo <p-sortIcon field="correo"></p-sortIcon></th>
+                    <th pSortableColumn="category">Mensaje <p-sortIcon field="mensaje"></p-sortIcon></th>
+                    <th pSortableColumn="rating">Enviado <p-sortIcon field="created_at"></p-sortIcon></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-mensaje>
+                <tr>
+
+                    <td>{{mensaje.nombre}}</td>
+                    <td>{{mensaje.correo }}</td>
+                    <td>{{mensaje.mensaje}}</td>
+                    <td>{{mensaje.created_at | date:'dd/MM/yyyy HH:mm'}}</td>
+
+
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+  </div>
+
+</div>
+
+
+
+

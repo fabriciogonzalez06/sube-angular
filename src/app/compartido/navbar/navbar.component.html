@@ -1,0 +1,67 @@
+<p-scrollTop></p-scrollTop>
+<p-menubar>
+  <ng-template pTemplate="start">
+    <!-- <span  *ngIf="usuario?.token" >existe usuario</span> -->
+
+    <div class="p-d-flex p-flex-row">
+
+      <img src="assets/imagenes/logotipo.png" width="40" class="p-mr-2">
+      <button *ngIf="usuario && usuarioLogueado?.idRol===1"   (click)="mostrarSidebar =true" pButton pRipple type="button" icon="pi pi-align-justify"
+        class="p-button-rounded  "></button>
+      <button *ngIf="!usuario || usuarioLogueado?.idRol!==1" (click)="irInicioComercio()" class="btn-inicio click" >Inicio</button>
+      <button *ngIf="usuario && usuarioLogueado?.idRol===1" (click)="irInicioAdmin()" class="btn-inicio click" >Dashboard</button>
+
+    </div>
+  </ng-template>
+
+  <div  *ngIf="usuario"  class="p-d-flex p-flex-row "  >
+
+    <ul class="p-d-flex p-flex-row p-jc-center p-ai-center" >
+      <li> {{nombre}} </li>
+      <li class="p-ml-2">
+        <p-avatar (click)="opcPerfil.toggle($event)" [label]="inicialNombre" class="click" styleClass="p-mr-2" size="large" shape="circle"></p-avatar>
+      </li>
+    </ul>
+
+
+  </div>
+
+  <div *ngIf="!usuario"  class="p-d-flex p-flex-row " >
+
+    <button pButton pRipple type="button" (click)="irRegistro()" label="Registrarse" class="p-button-rounded p-button-success"></button>
+    <button pButton pRipple type="button" (click)="irInicioSesion()" label="Iniciar sesión" class="p-button-rounded p-ml-2"></button>
+
+
+
+
+  </div>
+</p-menubar>
+
+<p-sidebar [(visible)]="mostrarSidebar" [baseZIndex]="10000">
+
+  <img src="assets/imagenes/logotipo.png" width="30%" class="p-mr-2 p-mb-3">
+  <div class="p-d-flex p-flex-column contenedor-sidebar">
+
+    <p-divider></p-divider>
+    <a [routerLink]="['/administracion/productos']" class="click">Productos</a>
+    <p-divider></p-divider>
+    <!-- <a [routerLink]="['/administracion/categorias']" class="click">Categorias</a> -->
+    <p-divider></p-divider>
+    <a [routerLink]="['/administracion/preguntas']" class="click">Mensajes</a>
+    <p-divider></p-divider>
+
+
+  </div>
+
+
+</p-sidebar>
+
+<p-overlayPanel #opcPerfil>
+  <ng-template  pTemplate>
+    <div class="p-d-flex p-jc-center p-ai-center click" >
+      <i class="pi pi-power-off "  ></i>
+      <p (click)="cerrarSesion()" class=" p-ml-1 click">Cerrar sesión</p>
+    </div>
+  </ng-template>
+</p-overlayPanel>
+

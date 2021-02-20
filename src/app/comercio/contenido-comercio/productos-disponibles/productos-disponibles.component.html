@@ -1,0 +1,39 @@
+<div class="container ">
+
+  <app-skeleton-card *ngIf="cargando" [cantidad]="2"></app-skeleton-card>
+  <div *ngIf="!cargando">
+    <p-card class="p-shadow-6">
+      <div class="p-grid">
+
+        <p-card (click)="verProducto(p)" class="p-md-4 p-sm-12  tarjeta" [header]="p.nombre" styleClass="p-card-shadow tarjeta" [subheader]="p.nombreCategoria"
+          *ngFor="let p of productos">
+          <ng-template pTemplate="header" >
+            <img   alt="Card" [src]="p.imagen | noImagen">
+          </ng-template>
+          <p-tag styleClass="p-mr-2" severity="info" value="{{p?.precio |currency:'LPS'}}" [rounded]="true"></p-tag>
+
+        </p-card>
+      </div>
+    </p-card>
+  </div>
+
+</div>
+
+
+<p-dialog [responsive]="true" class="dialogo" header="Detalle {{productoSeleccionado?.nombre}}" [(visible)]="mostrarModalProducto" [style]="{width: '60vw'}" [baseZIndex]="10000">
+
+  <div class="p-d-flex p-flex-row p-jc-evenly ">
+    <img width="200px" class="p-mr-2" [src]="productoSeleccionado.imagen | noImagen" alt="{{productoSeleccionado.nombre}}">
+    <div class="p-d-flex p-flex-column">
+       <p> {{productoSeleccionado?.nombre}} </p>
+       <p-chip class="p-mb-1" label="{{productoSeleccionado.nombreCategoria}}"></p-chip>
+       <p-tag styleClass="p-mr-2" severity="info" value="{{productoSeleccionado?.precio |currency:'LPS'}}" [rounded]="true"></p-tag>
+
+      <p> {{productoSeleccionado.descripcion}} </p>
+    </div>
+
+  </div>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="mostrarModalProducto=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

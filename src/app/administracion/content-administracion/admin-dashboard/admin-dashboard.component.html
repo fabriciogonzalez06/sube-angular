@@ -1,0 +1,17 @@
+<div class="container">
+
+  <div class="p-grid">
+    <div class="p-md-6 p-sm-12 click ir-ruta" (click)="irRuta(d)" *ngFor="let d of dashboard">
+        <p-panel [header]="d.nombre" >
+            <div class="p-d-flex p-flex-column p-jc-center p-ai-center">
+              <img width="200px" [src]="d.imagen" [alt]="d.nombre">
+              <p class="p-m-0">
+                {{d.descripcion}}
+              </p>
+
+            </div>
+        </p-panel>
+    </div>
+  </div>
+</div>
+

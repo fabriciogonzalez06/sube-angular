@@ -1,0 +1,31 @@
+// .p-grid div{
+//   margin: 2px;
+
+// }
+
+
+
+img{
+  // width: 150px;
+  // // height: 150px;
+  // max-width: 150px;
+  // // max-height: 150px;}
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+
+::ng-deep .p-card.tarjeta:hover{
+
+
+    opacity: 0.5;
+
+}
+
+
+@media screen and (max-width:880px) {
+  ::ng-deep .p-dialog.p-component{
+    width: 100% !important;
+  }
+}
