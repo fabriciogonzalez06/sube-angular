@@ -12,7 +12,7 @@ COPY . .
 
 
 
-RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli@10.0.0
 
 RUN npm run build
 
